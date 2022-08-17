@@ -19,7 +19,7 @@ export class TodoComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: Tag[] = [];
   addOnBlur = true;
-  favColor: any;
+  favcolor: any;
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -45,7 +45,6 @@ export class TodoComponent implements OnInit {
   todoForm !: FormGroup;
 
 
-
   tasks: Task[] = [];
   research: Task[] = [];
   in_progress: Task[] = [];
@@ -54,15 +53,31 @@ export class TodoComponent implements OnInit {
 
   boards: any[];
 
+  closed: boolean;
+
   constructor(private fb: FormBuilder) {
     this.boards = [this.tasks, this.research, this.in_progress, this.review, this.completed_tasks];
+    this.closed = true;
   }
 
   ngOnInit(): void {
     this.todoForm = this.fb.group({
-      item: ['', Validators.required]
+      name: new FormControl('',Validators.required),
+      description: new FormControl('',Validators.required),
+      priorityControl: (Validators.required),
+      tags: new FormControl([]),
+      color: new FormControl('',Validators.required),
     })
+  }
 
+  addTask() {
+    this.tasks.push({
+      name: this.todoForm.value.name,
+      description: this.todoForm.value.description,
+      priority: this.todoForm.value.priorityControl,
+      color: this.todoForm.value.favcolor,
+      tags: this.todoForm.value.tags,
+    })
   }
 
 

@@ -1,19 +1,21 @@
-<div cdkDropListGroup>
-  <div class="row">
-    <div class="col-md-4">
-      {{boardTodos}}
-    </div>
+<div class="board">
+  <div cdkDropListGroup>
+    <div class="row">
+      <div class="col-md-4">
+        {{boardTodos}}
+      </div>
 
-    <div
-      cdkDropList
-      [cdkDropListData]="boardTodos"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let task of boardTodos" cdkDrag>
-        {{task}}
+      <div
+        cdkDropList
+        [cdkDropListData]="boardTodos"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let task of boardTodos" cdkDrag>
+          {{task.name}}
+          {{task.description}}
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 

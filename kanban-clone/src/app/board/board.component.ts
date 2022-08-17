@@ -8,11 +8,13 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 })
 export class BoardComponent implements OnInit {
 
-  @Input() public boardTodos: any;
+  @Input() public boardTodos: Task[] | any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+
   }
 
   drop(event: CdkDragDrop<Task[]>) {

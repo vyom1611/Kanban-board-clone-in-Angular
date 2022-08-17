@@ -1,55 +1,64 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3" style="background-color: rgba(95,179,239,0.53); justify-content: space-between; height: 700px">
-      <div class="form-custom">
-        <mat-card class="mt-3">
-          <h3>Create a new Task</h3>
-          <form [formGroup]="todoForm">
-            <mat-form-field appearance="fill">
-              <mat-label>Enter Task Name Here</mat-label>
-              <input matInput placeholder="">
-            </mat-form-field>
-            <mat-form-field appearance="fill" [color]="priorityControl.value">
-              <mat-label>Priority</mat-label>
-              <mat-select [formControl]="priorityControl">
-                <mat-option value="urgent">Urgent</mat-option>
-                <mat-option value="important">Important</mat-option>
-                <mat-option value="normal">Normal</mat-option>
-                <mat-option value="low">Low</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill" >
-              <mat-label>Description</mat-label>
-              <textarea matInput></textarea>
-            </mat-form-field>
-            <mat-form-field class="example-chip-list" appearance="fill">
-              <mat-label>Add Tags</mat-label>
-              <mat-chip-list #chipList aria-label="Tags selection">
-                <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
-                  {{tag.name}}
-                  <button matChipRemove>
-                    <mat-icon>cancel</mat-icon>
-                  </button>
-                </mat-chip>
-                <input placeholder="New tag..."
-                       [matChipInputFor]="chipList"
-                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                       [matChipInputAddOnBlur]="addOnBlur"
-                       (matChipInputTokenEnd)="add($event)"
-                       />
-              </mat-chip-list>
-            </mat-form-field>
-            <input type="color" id="favcolor" name="favcolor"
-                   value="#e66465" style="width: 100%; border: 2px solid darkgray"><br><br>
-            <button mat-raised-button [disabled]="todoForm.invalid" color="primary">Add</button>
-          </form>
-        </mat-card>
+<div style="display: flex; flex-direction: row; overflow: scroll;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-auto" style="background-color: rgba(95,179,239,0.53); justify-content: space-between; height: 700px">
+        <div *ngIf="closed" class="form-custom">
+          <mat-card class="mt-3">
+            <div><h3>Create a new Task</h3><span style="float: right; margin-top: -42px" class="material-icons" ><div (click)=" this.closed = false" style="cursor: pointer">close</div></span></div>
+            <form [formGroup]="todoForm">
+              <mat-form-field appearance="fill">
+                <mat-label>Enter Task Name Here</mat-label>
+                <input formControlName="name" matInput placeholder="">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Priority</mat-label>
+                <mat-select [formControl]="priorityControl">
+                  <mat-option value="urgent">Urgent</mat-option>
+                  <mat-option value="important">Important</mat-option>
+                  <mat-option value="normal">Normal</mat-option>
+                  <mat-option value="low">Low</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill" >
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" matInput></textarea>
+              </mat-form-field>
+              <mat-form-field class="example-chip-list" appearance="fill">
+                <mat-label>Add Tags</mat-label>
+                <mat-chip-list formControlName="tags" #chipList aria-label="Tags selection">
+                  <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
+                    {{tag.name}}
+                    <button matChipRemove>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip>
+                  <input placeholder="New tag..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"
+                         />
+                </mat-chip-list>
+              </mat-form-field>
+              <input formControlName="color" type="color" id="favcolor"
+                     value="#e66465" style="width: 100%; border: 2px solid darkgray"><br><br>
+              <button mat-raised-button [disabled]="todoForm.invalid" color="primary" (click)="addTask()">Add</button>
+            </form>
+          </mat-card>
+        </div>
+        <div *ngIf="this.closed == false">
+          <span class="material-icons" style="margin: 100% 0; cursor:pointer;" (click)="closed = true">arrow_forward</span>
+        </div>
       </div>
     </div>
-    <div class="col-md-9">
-      <div *ngFor="let board of boards">
-        <app-board [boardTodos]="board"></app-board>
-      </div>
-    </div>
+  </div>
+  <div>
+        <span>
+        <div class="" style="display: flex; flex-direction: row; overflow: auto ">
+          <div *ngFor="let board of boards" style="width: 300px ;padding: 10px; height: fit-content" >
+            <app-board [boardTodos]="board"></app-board>
+          </div>
+        </div>
+          </span>
   </div>
 </div>

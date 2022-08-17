@@ -2,12 +2,13 @@ export interface Task {
   name: string;
   description: string;
   priority: priority,
-  done: boolean,
+  tags: string[],
+  color: string,
 }
 
 enum priority {
-  Urgent,
-  Important,
-  Normal,
-  Low
+  urgent,
+  important,
+  normal,
+  low
 }
