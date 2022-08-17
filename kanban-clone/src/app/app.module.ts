@@ -14,12 +14,19 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
+import {ColorPickerModule} from "ngx-color-picker";
+
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { BoardComponent } from './board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TodoComponent
+    TodoComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +38,11 @@ import {MatButtonModule} from "@angular/material/button";
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatChipsModule,
+    MatIconModule,
+    ColorPickerModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
