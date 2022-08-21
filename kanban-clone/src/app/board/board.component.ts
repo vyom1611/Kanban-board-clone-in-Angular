@@ -14,8 +14,9 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log(this.boardTodos[0].tags)
   }
+
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {

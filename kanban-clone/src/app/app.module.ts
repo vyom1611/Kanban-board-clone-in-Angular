@@ -20,15 +20,13 @@ import {ColorPickerModule} from "ngx-color-picker";
 
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { BoardComponent } from './board/board.component';
-import { AddFormComponent } from './add-form/add-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     TodoComponent,
-    BoardComponent,
-    AddFormComponent
+    BoardComponent
   ],
   imports: [
     BrowserModule,

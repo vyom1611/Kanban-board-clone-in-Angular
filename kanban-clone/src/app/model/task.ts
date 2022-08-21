@@ -2,8 +2,12 @@ export interface Task {
   name: string;
   description: string;
   priority: priority,
-  tags: string[],
+  tags: Tag[],
   color: string,
+}
+
+export interface Tag {
+  name: string
 }
 
 enum priority {

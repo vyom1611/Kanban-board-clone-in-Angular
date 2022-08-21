@@ -3,11 +3,8 @@ import {FloatLabelType} from "@angular/material/form-field";
 import {FormControl, FormGroup, FormBuilder, Validator, Validators} from "@angular/forms";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {Task} from "../model/task";
+import {Task, Tag} from "../model/task";
 
-export interface Tag {
-  name: string;
-}
 
 @Component({
   selector: 'app-todo',
@@ -19,7 +16,7 @@ export class TodoComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: Tag[] = [];
   addOnBlur = true;
-  favcolor: any;
+  color: any;
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -45,11 +42,41 @@ export class TodoComponent implements OnInit {
   todoForm !: FormGroup;
 
 
-  tasks: Task[] = [];
-  research: Task[] = [];
-  in_progress: Task[] = [];
-  review: Task[] = [];
-  completed_tasks: Task[] = [];
+  tasks: {
+    name: string,
+    arr: Task[]
+  } = {
+    name: "Tasks",
+    arr:[]
+  };
+  research: {
+    name: string,
+    arr: Task[]
+  } = {
+    name: "Research",
+    arr:[]
+  };
+  in_progress: {
+    name: string,
+    arr: Task[]
+  } = {
+    name: "In-progress",
+    arr:[]
+  };
+  review: {
+    name: string,
+    arr: Task[]
+  } = {
+    name: "Review",
+    arr:[]
+  };
+  completed_tasks: {
+    name: string,
+    arr: Task[]
+  } = {
+    name: "Completed",
+    arr:[]
+  };
 
   boards: any[];
 
@@ -64,18 +91,18 @@ export class TodoComponent implements OnInit {
     this.todoForm = this.fb.group({
       name: new FormControl('',Validators.required),
       description: new FormControl('',Validators.required),
-      priorityControl: (Validators.required),
-      tags: new FormControl([]),
+      priority: new FormControl('normal',Validators.required),
+      tags: new FormControl(this.tags),
       color: new FormControl('',Validators.required),
     })
   }
 
   addTask() {
-    this.tasks.push({
-      name: this.todoForm.value.name,
+    this.tasks.arr.push({
+    name: this.todoForm.value.name,
       description: this.todoForm.value.description,
-      priority: this.todoForm.value.priorityControl,
-      color: this.todoForm.value.favcolor,
+      priority: this.todoForm.value.priority,
+      color: this.todoForm.value.color,
       tags: this.todoForm.value.tags,
     })
   }

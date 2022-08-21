@@ -2,7 +2,9 @@
   <div cdkDropListGroup>
     <div class="row">
       <div class="col-md-4">
-        {{boardTodos}}
+        <div class="title-task">
+          {{this.boardTodos.name}}
+        </div>
       </div>
 
       <div
@@ -10,9 +12,20 @@
         [cdkDropListData]="boardTodos"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let task of boardTodos" cdkDrag>
-          {{task.name}}
-          {{task.description}}
+        <div class="example-box" *ngFor="let task of this.boardTodos.arr" cdkDrag>
+          <div class="color-box" [style.background-color]="task.color" >
+          </div>
+          <div class="body-cont">
+            <h2>{{task.name}}</h2>
+            <h5>{{task.description}}</h5>
+            <p>{{task.priority}}</p>
+            <div class="tag">
+              <mat-chip *ngFor="let tag of task.tags">
+                {{tag.name}}
+              </mat-chip>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
