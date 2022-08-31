@@ -18,7 +18,7 @@
           <div class="body-cont">
             <h2>{{task.name}}</h2>
             <h5>{{task.description}}</h5>
-            <p>{{task.priority}}</p>
+            <p>{{task.priority | titlecase }}</p>
             <div class="tag">
               <mat-chip *ngFor="let tag of task.tags">
                 {{tag.name}}

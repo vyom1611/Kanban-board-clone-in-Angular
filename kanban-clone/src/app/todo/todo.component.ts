@@ -12,7 +12,6 @@ import {Task, Tag} from "../model/task";
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  priorityControl = new FormControl("normal");
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: Tag[] = [];
   addOnBlur = true;
@@ -85,9 +84,6 @@ export class TodoComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.boards = [this.tasks, this.research, this.in_progress, this.review, this.completed_tasks];
     this.closed = true;
-  }
-
-  ngOnInit(): void {
     this.todoForm = this.fb.group({
       name: new FormControl('',Validators.required),
       description: new FormControl('',Validators.required),
@@ -95,6 +91,10 @@ export class TodoComponent implements OnInit {
       tags: new FormControl(this.tags),
       color: new FormControl('',Validators.required),
     })
+  }
+
+  ngOnInit(): void {
+
   }
 
   addTask() {
@@ -105,6 +105,7 @@ export class TodoComponent implements OnInit {
       color: this.todoForm.value.color,
       tags: this.todoForm.value.tags,
     })
+
   }
 
 
